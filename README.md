@@ -22,5 +22,11 @@ foreach (var item in products.ValueWhere(p => p.Price < 1000))
 }
 ```
 
+# Supported operators
+ - `Select`
+ - `Take`
+ - `TakeWhile`
+ - `Where`
+
 # Limitations
  - Some combinations of operator chains may not be implemented yet, so they may use boxing.
