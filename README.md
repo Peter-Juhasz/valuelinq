@@ -1,6 +1,8 @@
 # ValueLinq
 LINQ implementation using value typed enumerators.
 
+![.NET Core](https://github.com/Peter-Juhasz/valuelinq/workflows/.NET%20Core/badge.svg)
+
 # Introduction
 The goal of this project is to provide an option to reduce the number of heap allocations while you can still preserve the convenience of using LINQ-like operators.
 
