@@ -10,9 +10,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.Linq.Value", "src\System.Linq.Value\System.Linq.Value.csproj", "{D30D6DF8-E1C0-4A6D-AB16-D6E42519D3D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "System.Linq.Value", "src\System.Linq.Value\System.Linq.Value.csproj", "{D30D6DF8-E1C0-4A6D-AB16-D6E42519D3D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.Linq.Value.Tests", "tests\System.Linq.Value.Tests\System.Linq.Value.Tests.csproj", "{C1AE0A46-2DBB-486E-9259-F1287849481B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "System.Linq.Value.Tests", "tests\System.Linq.Value.Tests\System.Linq.Value.Tests.csproj", "{C1AE0A46-2DBB-486E-9259-F1287849481B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.Linq.Value.Benchmarks", "perf\System.Linq.Value.Benchmarks\System.Linq.Value.Benchmarks.csproj", "{56480AF0-CC10-4819-AAA8-FE1097FBB5DC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,6 +30,10 @@ Global
 		{C1AE0A46-2DBB-486E-9259-F1287849481B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C1AE0A46-2DBB-486E-9259-F1287849481B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C1AE0A46-2DBB-486E-9259-F1287849481B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56480AF0-CC10-4819-AAA8-FE1097FBB5DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56480AF0-CC10-4819-AAA8-FE1097FBB5DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56480AF0-CC10-4819-AAA8-FE1097FBB5DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56480AF0-CC10-4819-AAA8-FE1097FBB5DC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
