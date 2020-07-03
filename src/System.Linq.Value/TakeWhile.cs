@@ -6,22 +6,21 @@ namespace System.Linq.Value
 {
     public static partial class EnumerableExtensions
     {
-        public static TakeEnumerable<T> ValueTake<T>(this IEnumerable<T> source, int count) =>
-            new TakeEnumerable<T>(source, count);
+        public static TakeWhileEnumerable<T> ValueTakeWhile<T>(this IEnumerable<T> source, Func<T, bool> predicate) =>
+            new TakeWhileEnumerable<T>(source, predicate);
 
-
-        public readonly struct TakeEnumerable<T> : IEnumerable<T>
+        public readonly struct TakeWhileEnumerable<T> : IEnumerable<T>
         {
-            public TakeEnumerable(IEnumerable<T> source, int count)
+            public TakeWhileEnumerable(IEnumerable<T> source, Func<T, bool> predicate)
             {
                 this.source = source;
-                this.count = count;
+                this.predicate = predicate;
             }
 
             private readonly IEnumerable<T> source;
-            private readonly int count;
+            private readonly Func<T, bool> predicate;
 
-            public Enumerator GetEnumerator() => new Enumerator(source, count);
+            public Enumerator GetEnumerator() => new Enumerator(source, predicate);
 
             IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
 
@@ -29,50 +28,47 @@ namespace System.Linq.Value
 
             public struct Enumerator : IEnumerator<T>
             {
-                public Enumerator(IEnumerable<T> source, int count)
+                public Enumerator(IEnumerable<T> source, Func<T, bool> predicate)
                 {
                     Current = default!;
                     enumerator = source.GetEnumerator();
-                    this.count = count;
-                    index = 0;
+                    this.predicate = predicate;
                 }
 
                 private readonly IEnumerator<T> enumerator;
-                private readonly int count;
+                private readonly Func<T, bool> predicate;
 
                 public T Current { get; private set; }
 
                 object? IEnumerator.Current => this.Current;
 
-                private int index;
-
                 public bool MoveNext()
                 {
-                    if (index == count)
-                    {
-                        return false;
-                    }
-
                     if (enumerator.MoveNext())
                     {
-                        index++;
-                        Current = enumerator.Current;
-                        return true;
+                        var current = enumerator.Current;
+                        if (predicate(current))
+                        {
+                            Current = current;
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
                     }
-                    else
-                    {
-                        return false;
-                    }
+
+                    return false;
                 }
 
                 public void Reset()
                 {
                     enumerator.Reset();
-                    index = -1;
                 }
 
                 public void Dispose() => enumerator.Dispose();
             }
         }
+
     }
 }
