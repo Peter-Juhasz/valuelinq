@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30223.230
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E9FC9909-04AB-4552-B03A-BC97699F8AF5}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.Linq.Value", "src\System.Linq.Value\System.Linq.Value.csproj", "{D30D6DF8-E1C0-4A6D-AB16-D6E42519D3D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.Linq.Value.Tests", "tests\System.Linq.Value.Tests\System.Linq.Value.Tests.csproj", "{C1AE0A46-2DBB-486E-9259-F1287849481B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D30D6DF8-E1C0-4A6D-AB16-D6E42519D3D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30D6DF8-E1C0-4A6D-AB16-D6E42519D3D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30D6DF8-E1C0-4A6D-AB16-D6E42519D3D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30D6DF8-E1C0-4A6D-AB16-D6E42519D3D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1AE0A46-2DBB-486E-9259-F1287849481B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1AE0A46-2DBB-486E-9259-F1287849481B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1AE0A46-2DBB-486E-9259-F1287849481B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1AE0A46-2DBB-486E-9259-F1287849481B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BFBCE822-190C-4F81-8E59-F07452420755}
+	EndGlobalSection
+EndGlobal
