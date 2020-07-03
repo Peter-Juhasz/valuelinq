@@ -1,0 +1,11 @@
+[*]
+indent_size = 4
+
+[*.{cs,vb}]
+charset = utf-8-bom
+
+[*.cs]
+csharp_space_after_keywords_in_control_flow_statements = true
+csharp_space_around_binary_operators = before_and_after
+end_of_line = crlf
+indent_style = space
