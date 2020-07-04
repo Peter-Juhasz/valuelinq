@@ -30,6 +30,7 @@ foreach (var item in products.ValueWhere(p => p.Price < 1000))
  - `Select`
  - `SelectMany`
  - `Skip`
+ - `SkipWhile`
  - `Take`
  - `TakeWhile`
  - `Where`
