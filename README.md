@@ -27,6 +27,7 @@ foreach (var item in products.ValueWhere(p => p.Price < 1000))
 # Supported operators
  - `Concat`
  - `Join`
+ - `Prepend`
  - `Select`
  - `SelectMany`
  - `Skip`
