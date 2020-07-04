@@ -29,6 +29,7 @@ foreach (var item in products.ValueWhere(p => p.Price < 1000))
  - `Join`
  - `Select`
  - `SelectMany`
+ - `Skip`
  - `Take`
  - `TakeWhile`
  - `Where`
