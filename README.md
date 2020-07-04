@@ -28,6 +28,7 @@ foreach (var item in products.ValueWhere(p => p.Price < 1000))
  - `Append`
  - `Concat`
  - `Except`
+ - `Intersect`
  - `Join`
  - `Prepend`
  - `Select`
