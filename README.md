@@ -54,22 +54,22 @@ foreach (var item in products.ValueWhere(p => p.Price < 1000))
 
 ## Supported operators
 
-| Operator      | Enumerables (references) | StringTokenizer |
-|---------------|--------------------------|-----------------|
-| `Append`     |     X                    |                 |
-| `Concat`		|     X                    |				 |
-| `Except`		|     X                    |				 |
-| `Intersect`	|     X                    |				 |
-| `Join`		|     X                    |				 |
-| `Prepend`		|     X                    |				 |
-| `Select`		|     X                    |		X   	 |
-| `SelectMany`	|     X                    |				 |
-| `Skip`		|     X                    |				 |
-| `SkipWhile`	|     X                    |				 |
-| `Take`		|     X                    |				 |
-| `TakeWhile`	|     X                    |				 |
-| `Where`		|     X                    |		X		 |
-| `Zip`			|     X                    |				 |
+| Operator      | IEnumerable&lt;T&gt; (references) | StringTokenizer | ReadOnlySpan&lt;T&gt; |
+|---------------|--------------------------|-----------------|-----------------------|
+| `Append`     |     X                    |                 | |
+| `Concat`		|     X                    |				 | |
+| `Except`		|     X                    |				 | |
+| `Intersect`	|     X                    |				 | |
+| `Join`		|     X                    |				 | |
+| `Prepend`		|     X                    |				 | |
+| `Select`		|     X                    |		X   	 |X|
+| `SelectMany`	|     X                    |				 | |
+| `Skip`		|     X                    |				 | |
+| `SkipWhile`	|     X                    |				 | |
+| `Take`		|     X                    |				 | |
+| `TakeWhile`	|     X                    |				 | |
+| `Where`		|     X                    |		X		 | |
+| `Zip`			|     X                    |				 | |
 
 Support is planned for `ReadOnlySpan<T>` and `ReadOnlySequence<T>` as well.
 
