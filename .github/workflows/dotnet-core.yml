@@ -20,11 +20,11 @@ jobs:
     - name: Install dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --configuration Release --no-restore
+      run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-restore --no-build --verbosity normal
     - name: Pack
-      run: dotnet pack --configuration Release --no-restore --no-build
+      run: dotnet pack --configuration Release --no-restore
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v2
       with:
