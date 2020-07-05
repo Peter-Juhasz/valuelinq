@@ -3,15 +3,17 @@
     <PropertyGroup>
         <TargetFramework>netstandard2.1</TargetFramework>
         <Nullable>enable</Nullable>
-        
+
+        <AssemblyName>PeterJuhasz.Linq.Value</AssemblyName>
         <PackageId>PeterJuhasz.Linq.Value</PackageId>
         <Version>1.0.0-preview1</Version>
         <Description>LINQ implementation using value typed enumerators for performance critical applications.</Description>
         <Authors>Péter Juhász</Authors>
         <PackageTags>linq, value types, performance</PackageTags>
         <RepositoryUrl>https://github.com/Peter-Juhasz/valuelinq</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
         <PackageProjectUrl>https://github.com/Peter-Juhasz/valuelinq</PackageProjectUrl>
-        <PackageLicenseUrl>https://github.com/Peter-Juhasz/valuelinq/blob/master/LICENSE</PackageLicenseUrl>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
     </PropertyGroup>
 
     <ItemGroup>
