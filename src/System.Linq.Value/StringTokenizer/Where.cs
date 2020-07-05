@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace System.Linq.Value
+namespace System.Linq
 {
     public static partial class StringTokenizerExtensions
     {

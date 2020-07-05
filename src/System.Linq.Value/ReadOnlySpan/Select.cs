@@ -1,4 +1,4 @@
-﻿namespace System.Linq.Value
+﻿namespace System.Linq
 {
     public static partial class ReadOnlySpanExtensions
     {
