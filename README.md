@@ -17,6 +17,34 @@ So, this project provides you a (limited) 3rd option where you can have the adva
 ## Example
 The extensions methods are in the `System.Linq` namespace, but they are all prefixed with `Value`.
 
+You can use them in high performance scenarios, like parsing GPS data from a CSV-like (NMEA) format. The following code snippet is easy to read and maintain, while it is allocation free and parses each line only once.
+
+```cs
+if (line.StartsWith("$GPGGA"))
+{
+    var parts = new StringTokenizer(line, Separators);
+    foreach (var (index, part) in parts.ValueSelect((s, i) => (index: i, part: s)))
+    {
+        switch (index)
+        {
+            case 2:
+                Double.TryParse(part, NumberStyles.Float, CultureInfo.InvariantCulture, out latitude);
+                break;
+
+            case 4:
+                Double.TryParse(part, NumberStyles.Float, CultureInfo.InvariantCulture, out longitude);
+                break;
+
+            case 6:
+                Int32.TryParse(part, NumberStyles.Integer, CultureInfo.InvariantCulture, out quality);
+                break;
+        }
+    }
+}
+```
+
+Or you can use them with regular reference type collections, like this:
+
 ```cs
 foreach (var item in products.ValueWhere(p => p.Price < 1000))
 {
