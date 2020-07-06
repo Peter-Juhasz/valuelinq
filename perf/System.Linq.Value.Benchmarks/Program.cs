@@ -7,7 +7,7 @@ namespace System.Linq.Value.Benchmarks
     {
         static void Main(string[] args)
         {
-            BenchmarkRunner.Run<StringTokenizerBenchmarks>();
+            BenchmarkRunner.Run<EnumerableBenchmarks>();
         }
     }
 }

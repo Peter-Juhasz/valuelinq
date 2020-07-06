@@ -55,43 +55,52 @@ foreach (var item in products.ValueWhere(p => p.Price < 1000))
 ## Supported operators
 
 | Operator      | IEnumerable&lt;T&gt; (references) | StringTokenizer | ReadOnlySpan&lt;T&gt; |
-|---------------|--------------------------|-----------------|-----------------------|
-| `Append`     |     X                    |                 | |
-| `Concat`		|     X                    |				 | |
-| `Except`		|     X                    |				 | |
-| `Intersect`	|     X                    |				 | |
-| `Join`		|     X                    |				 | |
-| `Prepend`		|     X                    |				 | |
-| `Select`		|     X                    |		X   	 |X|
-| `SelectMany`	|     X                    |				 | |
-| `Skip`		|     X                    |				 | |
-| `SkipWhile`	|     X                    |				 | |
-| `Take`		|     X                    |				 | |
-| `TakeWhile`	|     X                    |				 | |
-| `Where`		|     X                    |		X		 | |
-| `Zip`			|     X                    |				 | |
+|---------------|-----------------------------------|-----------------|-----------------------|
+| `Append`     | X |   |   |
+| `Concat`		| X |	|   |
+| `Except`		| X |	|   |
+| `Intersect`	| X |	|   |
+| `Join`		| X |	|   |
+| `Prepend`		| X |	|   |
+| `Select`		| X | X | X |
+| `SelectMany`	| X |	|   |
+| `Skip`		| X |	|   |
+| `SkipWhile`	| X |	|   |
+| `Take`		| X |	|   |
+| `TakeWhile`	| X |	|   |
+| `Where`		| X | X |   |
+| `Zip`			| X |	|   |
 
-Support is planned for `ReadOnlySpan<T>` and `ReadOnlySequence<T>` as well.
+Support is planned for `T[]`, `ReadOnlySpan<T>` and `ReadOnlySequence<T>` as well.
 
 ## Benchmarks
 
+Each test has the following three implementations to compare:
+ - using built-in LINQ (built on reference types) *(usually with most allocations)*
+ - using the value type enumerators of this project *(usually with less allocations, sometimes faster, sometimes slower)*
+ - custom implementation of an algorithm, that uses no LINQ-like functions *(usually the fastest, with minimum allocations)*
+
 ### IEnumerable&lt;T&gt; references
 
-|      Method |     Mean |   Error |  StdDev |  Gen 0 | Gen 1 | Gen 2 | Allocated |
-|------------ |---------:|--------:|--------:|-------:|------:|------:|----------:|
-|      Select | 156.2 ns | 0.77 ns | 0.60 ns | 0.0076 |     - |     - |      48 B |
-| ValueSelect | 138.2 ns | 0.24 ns | 0.19 ns | 0.0050 |     - |     - |  **32 B** |
-|       Where | 100.9 ns | 1.81 ns | 1.51 ns | 0.0076 |     - |     - |      48 B |
-|  ValueWhere | 121.5 ns | 1.61 ns | 1.50 ns | 0.0050 |     - |     - |  **32 B** |
+|          Method |       Mean |     Error |    StdDev |      Gen 0 | Gen 1 | Gen 2 | Allocated |
+|---------------- |-----------:|----------:|----------:|-----------:|------:|------:|----------:|
+|          Select | 150.919 ns | 2.9182 ns | 2.7297 ns |     0.0076 |     - |     - |      48 B |
+| **ValueSelect** | 124.028 ns | 0.4206 ns | 0.3935 ns | **0.0050** |     - |     - |  **32 B** |
+| SelectIterative |   9.359 ns | 0.0268 ns | 0.0238 ns |          - |     - |     - |         - |
+|           Where |  86.296 ns | 0.2998 ns | 0.2658 ns |     0.0076 |     - |     - |      48 B |
+|  **ValueWhere** | 121.756 ns | 0.5245 ns | 0.4906 ns | **0.0050** |     - |     - |  **32 B** |
+|  WhereIterative |  12.382 ns | 0.0485 ns | 0.0453 ns |          - |     - |     - |         - |
 
 ### StringTokenizer
 
-|      Method |     Mean |   Error |  StdDev |  Gen 0 | Gen 1 | Gen 2 | Allocated |
-|------------ |---------:|--------:|--------:|-------:|------:|------:|----------:|
-|      Select | 455.4 ns | 0.55 ns | 0.43 ns | 0.0253 |     - |     - |     160 B |
-| ValueSelect | 273.2 ns | 0.30 ns | 0.26 ns |      - |     - |     - |     **-** |
-|       Where | 477.5 ns | 0.66 ns | 0.58 ns | 0.0267 |     - |     - |     168 B |
-|  ValueWhere | 280.3 ns | 1.48 ns | 1.31 ns |      - |     - |     - |     **-** |
+|          Method |     Mean |   Error |  StdDev |  Gen 0 | Gen 1 | Gen 2 | Allocated |
+|---------------- |---------:|--------:|--------:|-------:|------:|------:|----------:|
+|          Select | 454.9 ns | 3.62 ns | 3.39 ns | 0.0253 |     - |     - |     160 B |
+| **ValueSelect** | 276.3 ns | 0.40 ns | 0.35 ns |  **-** |     - |     - |     **-** |
+| SelectIterative | 208.7 ns | 1.04 ns | 0.87 ns |      - |     - |     - |         - |
+|           Where | 474.6 ns | 0.56 ns | 0.53 ns | 0.0267 |     - |     - |     168 B |
+|  **ValueWhere** | 297.7 ns | 1.71 ns | 1.34 ns |  **-** |     - |     - |     **-** |
+|  WhereIterative | 220.7 ns | 0.44 ns | 0.41 ns |      - |     - |     - |         - |
 
 Measured on:
 BenchmarkDotNet=v0.12.1, OS=Windows 10.0.19041.329 (2004/?/20H1)
