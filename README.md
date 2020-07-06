@@ -1,5 +1,5 @@
 # ValueLinq
-LINQ implementation using value typed enumerators.
+LINQ implementation using specialized value type enumerators.
 
 ![.NET Core](https://github.com/Peter-Juhasz/valuelinq/workflows/.NET%20Core/badge.svg)
 
@@ -54,22 +54,23 @@ foreach (var item in products.ValueWhere(p => p.Price < 1000))
 
 ## Supported operators
 
-| Operator      | IEnumerable&lt;T&gt; (references) | StringTokenizer | ReadOnlySpan&lt;T&gt; |
-|---------------|-----------------------------------|-----------------|-----------------------|
-| `Append`     | X |   |   |
-| `Concat`		| X |	|   |
-| `Except`		| X |	|   |
-| `Intersect`	| X |	|   |
-| `Join`		| X |	|   |
-| `Prepend`		| X |	|   |
-| `Select`		| X | X | X |
-| `SelectMany`	| X |	|   |
-| `Skip`		| X |	|   |
-| `SkipWhile`	| X |	|   |
-| `Take`		| X |	|   |
-| `TakeWhile`	| X |	|   |
-| `Where`		| X | X |   |
-| `Zip`			| X |	|   |
+| Operator      | IEnumerable&lt;T&gt; | IReadOnlyList&lt;T&gt; | StringTokenizer | ReadOnlySpan&lt;T&gt; |
+|---------------|----------------------|------------------------|-----------------|-----------------------|
+|               | references | arrays, collections, lists | string segments |  |
+| `Append`     | X |   |   |   |
+| `Concat`		| X |   |	|   |
+| `Except`		| X |   |	|   |
+| `Intersect`	| X |   |	|   |
+| `Join`		| X |   |	|   |
+| `Prepend`		| X |   |	|   |
+| `Select`		| X | X | X | X |
+| `SelectMany`	| X |   |	|   |
+| `Skip`		| X |   |	|   |
+| `SkipWhile`	| X |   |	|   |
+| `Take`		| X |   |	|   |
+| `TakeWhile`	| X |   |	|   |
+| `Where`		| X |   | X |   |
+| `Zip`			| X |   |	|   |
 
 Support is planned for `T[]`, `ReadOnlySpan<T>` and `ReadOnlySequence<T>` as well.
 
@@ -90,6 +91,18 @@ Each test has the following three implementations to compare:
 |           Where |  86.296 ns | 0.2998 ns | 0.2658 ns |     0.0076 |     - |     - |      48 B |
 |  **ValueWhere** | 121.756 ns | 0.5245 ns | 0.4906 ns | **0.0050** |     - |     - |  **32 B** |
 |  WhereIterative |  12.382 ns | 0.0485 ns | 0.0453 ns |          - |     - |     - |         - |
+
+The cost here is the allocation of the `IEnumerator<T>`.
+
+### IReadOnlyList&lt;T&gt; (including arrays, collections, lists)
+
+|          Method |       Mean |     Error |    StdDev |  Gen 0 | Gen 1 | Gen 2 | Allocated |
+|---------------- |-----------:|----------:|----------:|-------:|------:|------:|----------:|
+|          Select | 141.082 ns | 0.5028 ns | 0.4703 ns | 0.0076 |     - |     - |      48 B |
+| **ValueSelect** | 131.368 ns | 0.5197 ns | 0.4607 ns |  **-** |     - |     - |     **-** |
+| SelectIterative |   6.125 ns | 0.0280 ns | 0.0248 ns |      - |     - |     - |         - |
+
+Compared to `IEnumerable<T>`s, in this case we can completely replace the enumerators with our custom ones, so avoid its allocation.
 
 ### StringTokenizer
 

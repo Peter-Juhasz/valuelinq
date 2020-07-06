@@ -7,7 +7,7 @@
         <AssemblyName>PeterJuhasz.Linq.Value</AssemblyName>
         <PackageId>PeterJuhasz.Linq.Value</PackageId>
         <Version>1.0.0-preview1</Version>
-        <Description>LINQ implementation using value typed enumerators for performance critical applications.</Description>
+        <Description>LINQ implementation using specialized value type enumerators for performance critical applications.</Description>
         <Authors>Péter Juhász</Authors>
         <PackageTags>linq, value types, performance</PackageTags>
         <RepositoryUrl>https://github.com/Peter-Juhasz/valuelinq</RepositoryUrl>

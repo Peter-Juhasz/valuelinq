@@ -1,14 +1,13 @@
 ﻿using BenchmarkDotNet.Attributes;
-using System.Collections.Generic;
 
 namespace System.Linq.Value.Benchmarks
 {
     [MemoryDiagnoser]
-    public class EnumerableBenchmarks
+    public class ReadOnlyListBenchmarks
     {
-        private readonly IEnumerable<int> numbers;
+        private readonly int[] numbers;
 
-        public EnumerableBenchmarks()
+        public ReadOnlyListBenchmarks()
         {
             Random random = new Random(0);
             numbers = Enumerable.Range(0, 16).Select(d => random.Next(0, 500)).ToArray();
@@ -49,41 +48,41 @@ namespace System.Linq.Value.Benchmarks
         }
 
 
-        [Benchmark]
-        public void Where()
-        {
-            int sum = 0;
+        //[Benchmark]
+        //public void Where()
+        //{
+        //    int sum = 0;
 
-            foreach (var i in numbers.Where(n => n % 2 == 0))
-            {
-                sum += i;
-            }
-        }
+        //    foreach (var i in numbers.Where(n => n % 2 == 0))
+        //    {
+        //        sum += i;
+        //    }
+        //}
 
-        [Benchmark]
-        public void ValueWhere()
-        {
-            int sum = 0;
+        //[Benchmark]
+        //public void ValueWhere()
+        //{
+        //    int sum = 0;
 
-            foreach (var i in numbers.ValueWhere(n => n % 2 == 0))
-            {
-                sum += i;
-            }
-        }
+        //    foreach (var i in numbers.ValueWhere(n => n % 2 == 0))
+        //    {
+        //        sum += i;
+        //    }
+        //}
 
-        [Benchmark]
-        public void WhereIterative()
-        {
-            int sum = 0;
+        //[Benchmark]
+        //public void WhereIterative()
+        //{
+        //    int sum = 0;
 
-            foreach (var i in numbers)
-            {
-                if (i % 2 == 0)
-                {
-                    sum += i;
-                }
-            }
-        }
+        //    foreach (var i in numbers)
+        //    {
+        //        if (i % 2 == 0)
+        //        {
+        //            sum += i;
+        //        }
+        //    }
+        //}
 
     }
 }
