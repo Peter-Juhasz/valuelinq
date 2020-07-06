@@ -34,6 +34,19 @@ namespace System.Linq.Value.Benchmarks
         }
 
         [Benchmark]
+        public void SelectIterative()
+        {
+            var tokenizer = new StringTokenizer(str, sep);
+            int sum = 0;
+
+            foreach (var n in tokenizer)
+            {
+                int i = n.Length;
+                sum += i;
+            }
+        }
+
+        [Benchmark]
         public void Where()
         {
             var tokenizer = new StringTokenizer(str, sep);
@@ -54,6 +67,21 @@ namespace System.Linq.Value.Benchmarks
             foreach (var i in tokenizer.ValueWhere(n => n.Length > 1))
             {
                 sum += i.Length;
+            }
+        }
+
+        [Benchmark]
+        public void WhereIterative()
+        {
+            var tokenizer = new StringTokenizer(str, sep);
+            int sum = 0;
+
+            foreach (var i in tokenizer)
+            {
+                if (i.Length > 1)
+                {
+                    sum += i.Length;
+                }
             }
         }
     }
