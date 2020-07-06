@@ -5,7 +5,13 @@ namespace System.Linq.Value.Benchmarks
     [MemoryDiagnoser]
     public class EnumerableBenchmarks
     {
-        private readonly int[] numbers = new int[] { 3, 5, 2, 5, 1, 6, 7, 43, 0, 4, 213, 0, 4, 635, 4, 3 };
+        private readonly int[] numbers;
+
+        public EnumerableBenchmarks()
+        {
+            Random random = new Random(0);
+            numbers = Enumerable.Range(0, 16).Select(d => random.Next(0, 500)).ToArray();
+        }
 
         [Benchmark]
         public void Select()
@@ -30,6 +36,19 @@ namespace System.Linq.Value.Benchmarks
         }
 
         [Benchmark]
+        public void SelectIterative()
+        {
+            int sum = 0;
+
+            foreach (var n in numbers)
+            {
+                int i = n * 2;
+                sum += i;
+            }
+        }
+
+
+        [Benchmark]
         public void Where()
         {
             int sum = 0;
@@ -50,5 +69,20 @@ namespace System.Linq.Value.Benchmarks
                 sum += i;
             }
         }
+
+        [Benchmark]
+        public void WhereIterative()
+        {
+            int sum = 0;
+
+            foreach (var i in numbers)
+            {
+                if (i % 2 == 0)
+                {
+                    sum += i;
+                }
+            }
+        }
+
     }
 }
