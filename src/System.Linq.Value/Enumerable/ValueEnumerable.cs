@@ -11,11 +11,19 @@ namespace System.Linq
 
         public static EmptyEnumerable<T> Empty<T>() => new EmptyEnumerable<T>();
 
-        public readonly struct Value1Enumerable<T> : IEnumerable<T>
+        public readonly struct Value1Enumerable<T> : IEnumerable<T>, IReadOnlyCollection<T>, IReadOnlyList<T>
         {
             public Value1Enumerable(T value) => Value = value;
 
             public T Value { get; }
+
+            public int Count => 1;
+
+            public T this[int index] => index switch
+            {
+                0 => Value,
+                _ => throw new ArgumentOutOfRangeException(nameof(index))
+            };
 
             public IEnumerator<T> GetEnumerator() => new Value1Enumerator(Value);
 
@@ -60,7 +68,7 @@ namespace System.Linq
             }
         }
 
-        public readonly struct Value2Enumerable<T> : IEnumerable<T>
+        public readonly struct Value2Enumerable<T> : IEnumerable<T>, IReadOnlyCollection<T>, IReadOnlyList<T>
         {
             public Value2Enumerable(T value1, T value2)
             {
@@ -70,6 +78,15 @@ namespace System.Linq
 
             public T Value1 { get; }
             public T Value2 { get; }
+
+            public int Count => 2;
+
+            public T this[int index] => index switch
+            {
+                0 => Value1,
+                1 => Value2,
+                _ => throw new ArgumentOutOfRangeException(nameof(index))
+            };
 
             public IEnumerator<T> GetEnumerator() => new Value2Enumerator(Value1, Value2);
 
@@ -122,11 +139,15 @@ namespace System.Linq
             }
         }
 
-        public readonly struct EmptyEnumerable<T> : IEnumerable<T>
+        public readonly struct EmptyEnumerable<T> : IEnumerable<T>, IReadOnlyCollection<T>, IReadOnlyList<T>
         {
             public IEnumerator<T> GetEnumerator() => new EmptyEnumerator();
 
             IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+            public int Count => 0;
+
+            public T this[int index] => throw new ArgumentOutOfRangeException(nameof(index));
 
             public struct EmptyEnumerator : IEnumerator<T>
             {

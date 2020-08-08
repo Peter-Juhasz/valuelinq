@@ -10,6 +10,7 @@ namespace System.Linq.Value.Tests
         public void Empty()
         {
             var enumerable = ValueEnumerable.Empty<int>();
+            Assert.AreEqual(0, enumerable.Count);
             Assert.AreEqual(0, enumerable.Count());
         }
 
@@ -17,6 +18,10 @@ namespace System.Linq.Value.Tests
         public void Value1()
         {
             var enumerable = ValueEnumerable.Create(5);
+
+            Assert.AreEqual(1, enumerable.Count);
+            Assert.AreEqual(5, enumerable[0]);
+
             Assert.AreEqual(1, enumerable.Count());
             Assert.AreEqual(5, enumerable.Single());
         }
@@ -25,6 +30,11 @@ namespace System.Linq.Value.Tests
         public void Value2()
         {
             var enumerable = ValueEnumerable.Create(5, 7);
+
+            Assert.AreEqual(2, enumerable.Count);
+            Assert.AreEqual(5, enumerable[0]);
+            Assert.AreEqual(7, enumerable[1]);
+
             Assert.AreEqual(2, enumerable.Count());
             Assert.AreEqual(5, enumerable.First());
             Assert.AreEqual(7, enumerable.Last());

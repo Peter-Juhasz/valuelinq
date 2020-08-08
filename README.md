@@ -74,6 +74,25 @@ foreach (var item in products.ValueWhere(p => p.Price < 1000))
 
 Support is planned for `T[]`, `ReadOnlySpan<T>` and `ReadOnlySequence<T>` as well.
 
+## Value collections
+
+This library provides some value-type collections as well, which hold a predefined number of values.
+
+```cs
+var one = ValueEnumerable.Create(1);
+var two = ValueEnumerable.Create(1, 2);
+```
+
+Or you can create an empty one as well:
+
+```cs
+var empty = ValueEnumerable.Empty<int>();
+```
+
+All of these collection types implement `IEnumerable<T>`, `IReadOnlyCollection<T>`, and `IReadOnlyList<T>`.
+
+Note: for many usecases `Array.Empty<int>()` may be a sufficient or even better choice. Also, you can take a look at the type [`StringValues`](https://github.com/dotnet/runtime/blob/master/src/libraries/Microsoft.Extensions.Primitives/src/StringValues.cs), if you need to work with `string` instances.
+
 ## Benchmarks
 
 Each test has the following three implementations to compare:
