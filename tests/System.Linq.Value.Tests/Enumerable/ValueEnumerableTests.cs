@@ -20,5 +20,14 @@ namespace System.Linq.Value.Tests
             Assert.AreEqual(1, enumerable.Count());
             Assert.AreEqual(5, enumerable.Single());
         }
+
+        [TestMethod]
+        public void Value2()
+        {
+            var enumerable = ValueEnumerable.Create(5, 7);
+            Assert.AreEqual(2, enumerable.Count());
+            Assert.AreEqual(5, enumerable.First());
+            Assert.AreEqual(7, enumerable.Last());
+        }
     }
 }
